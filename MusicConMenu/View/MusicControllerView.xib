@@ -100,7 +100,7 @@
                         <constraint firstAttribute="height" constant="40" id="TvG-Zg-btF"/>
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyDown" id="RnT-QC-6tQ">
-                        <imageReference key="image" image="volume" catalog="system" symbolScale="large"/>
+                        <imageReference key="image" image="speaker" catalog="system" symbolScale="large"/>
                     </imageCell>
                 </imageView>
             </subviews>
@@ -149,6 +149,6 @@
         <image name="forward.fill" catalog="system" width="20" height="12"/>
         <image name="photo.artframe" catalog="system" width="18" height="14"/>
         <image name="play.fill" catalog="system" width="12" height="13"/>
-        <image name="volume" catalog="system" width="17" height="18"/>
+        <image name="speaker" catalog="system" width="17" height="18"/>
     </resources>
 </document>

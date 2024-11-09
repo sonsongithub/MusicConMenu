@@ -64,7 +64,7 @@
                         <constraint firstAttribute="height" constant="40" id="gqA-fU-kcG"/>
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyDown" id="DxW-Al-Atc">
-                        <imageReference key="image" image="volume" catalog="system" symbolScale="large"/>
+                        <imageReference key="image" image="speaker" catalog="system" symbolScale="large"/>
                     </imageCell>
                 </imageView>
             </subviews>
@@ -93,6 +93,6 @@
     </objects>
     <resources>
         <image name="homepod.fill" catalog="system" width="18" height="20"/>
-        <image name="volume" catalog="system" width="17" height="18"/>
+        <image name="speaker" catalog="system" width="17" height="18"/>
     </resources>
 </document>

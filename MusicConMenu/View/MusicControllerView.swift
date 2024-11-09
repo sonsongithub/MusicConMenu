@@ -73,15 +73,6 @@ class MusicControllerView : NSView {
         if let musicApp = SBApplication.musicApp {
             if let slider = self.volumeSlider {
                 musicApp.setSoundVolume?(slider.integerValue)
-                if slider.integerValue == 0 {
-                    self.volumeImage?.image = NSImage.init(systemSymbolName: "volume", accessibilityDescription: nil)
-                } else if slider.integerValue < 33 {
-                    self.volumeImage?.image = NSImage.init(systemSymbolName: "volume.1", accessibilityDescription: nil)
-                } else if slider.integerValue < 66 {
-                    self.volumeImage?.image = NSImage.init(systemSymbolName: "volume.2", accessibilityDescription: nil)
-                } else {
-                    self.volumeImage?.image = NSImage.init(systemSymbolName: "volume.3", accessibilityDescription: nil)
-                }
             }
         }
         self.setNeedsDisplay(.zero)
@@ -101,15 +92,7 @@ class MusicControllerView : NSView {
                 DispatchQueue.main.async {
                     if let slider = self.volumeSlider {
                         slider.doubleValue = Double(currentVolume)
-                        if slider.integerValue == 0 {
-                            self.volumeImage?.image = NSImage.init(systemSymbolName: "volume", accessibilityDescription: nil)
-                        } else if slider.integerValue < 33 {
-                            self.volumeImage?.image = NSImage.init(systemSymbolName: "volume.1", accessibilityDescription: nil)
-                        } else if slider.integerValue < 66 {
-                            self.volumeImage?.image = NSImage.init(systemSymbolName: "volume.2", accessibilityDescription: nil)
-                        } else {
-                            self.volumeImage?.image = NSImage.init(systemSymbolName: "volume.3", accessibilityDescription: nil)
-                        }
+                        self.volumeImage?.updateSoundVolume(with: slider)
                     }
                     if let titleLabel = self.titleLabel {
                         titleLabel.stringValue = String(songTitle)

@@ -8,6 +8,20 @@
 import Cocoa
 import Foundation
 
+extension NSImageView {
+    func updateSoundVolume(with slider: NSSlider) {
+        if slider.integerValue == 0 {
+            self.image = NSImage.init(systemSymbolName: "speaker", accessibilityDescription: nil)
+        } else if slider.integerValue < 33 {
+            self.image = NSImage.init(systemSymbolName: "speaker.wave.1", accessibilityDescription: nil)
+        } else if slider.integerValue < 66 {
+            self.image = NSImage.init(systemSymbolName: "speaker.wave.2", accessibilityDescription: nil)
+        } else {
+            self.image = NSImage.init(systemSymbolName: "speaker.wave.3", accessibilityDescription: nil)
+        }
+    }
+}
+
 @main
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     let mainMenu = NSMenu()

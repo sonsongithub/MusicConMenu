@@ -18,7 +18,6 @@ struct AirPlayDeviceInfo : Hashable {
 
 extension SBApplication {
     static var musicApp: MusicApplication? {
-//        guard SBApplication.isRunning() else { return nil }
         guard NSWorkspace.shared.runningApplications.contains(where: { $0.bundleIdentifier == "com.apple.Music" }) else { return nil }
         return SBApplication(bundleIdentifier: "com.apple.Music")
     }

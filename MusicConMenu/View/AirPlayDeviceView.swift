@@ -57,16 +57,7 @@ class AirPlayDeviceView : NSView {
                     stateSlider.isHidden = !device_select
                     self.volumeImage?.isHidden = !device_select
                     stateSlider.integerValue = device.soundVolume ?? 0
-                    
-                    if stateSlider.integerValue == 0 {
-                        self.volumeImage?.image = NSImage.init(systemSymbolName: "volume", accessibilityDescription: nil)
-                    } else if stateSlider.integerValue < 33 {
-                        self.volumeImage?.image = NSImage.init(systemSymbolName: "volume.1", accessibilityDescription: nil)
-                    } else if stateSlider.integerValue < 66 {
-                        self.volumeImage?.image = NSImage.init(systemSymbolName: "volume.2", accessibilityDescription: nil)
-                    } else {
-                        self.volumeImage?.image = NSImage.init(systemSymbolName: "volume.3", accessibilityDescription: nil)
-                    }
+                    self.volumeImage?.updateSoundVolume(with: stateSlider)
                 }
             }
         }
@@ -95,15 +86,6 @@ class AirPlayDeviceView : NSView {
         guard let musicApp = SBApplication.musicApp else { return }
         guard let device = musicApp.AirPlayDevices?().first(where: { String($0.name ?? "") == self.name }) else { return }
         device.setSoundVolume?(sender.integerValue)
-        
-        if sender.integerValue == 0 {
-            self.volumeImage?.image = NSImage.init(systemSymbolName: "volume", accessibilityDescription: nil)
-        } else if sender.integerValue < 33 {
-            self.volumeImage?.image = NSImage.init(systemSymbolName: "volume.1", accessibilityDescription: nil)
-        } else if sender.integerValue < 66 {
-            self.volumeImage?.image = NSImage.init(systemSymbolName: "volume.2", accessibilityDescription: nil)
-        } else {
-            self.volumeImage?.image = NSImage.init(systemSymbolName: "volume.3", accessibilityDescription: nil)
-        }
+        self.volumeImage?.updateSoundVolume(with: sender)
     }
 }
