@@ -1,5 +1,5 @@
 
-# How to create an application to control Music.app using AppleScript.
+#### How to create an application to control Music.app using AppleScript.
 
 Swift code to manage "Music.app" using AppleScript.
 
@@ -7,15 +7,15 @@ Swift code to manage "Music.app" using AppleScript.
 
 At first, you have to add the following privacy authentication phrase to the `Info.plist`.
 
-<img src="https://github.com/user-attachments/assets/0fc516b3-2b51-46b2-ae11-c7d0f63e85c7">
+<img src="https://github.com/user-attachments/assets/0fc516b3-2b51-46b2-ae11-c7d0f63e85c7" width=500>
 
 ## Permit the application to use AppleEvent.
 
-<img src="https://github.com/user-attachments/assets/915f8ab9-8b79-4747-a5b2-bd459c596aa0">
+<img src="https://github.com/user-attachments/assets/915f8ab9-8b79-4747-a5b2-bd459c596aa0" width=400>
 
 ## Permit to communicate with Music.app.
 
-<img src="https://github.com/user-attachments/assets/f067a910-3460-4388-8045-424acdfa2cd4">
+<img src="https://github.com/user-attachments/assets/f067a910-3460-4388-8045-424acdfa2cd4" width=500>
 
 # ScriptBridge
 
@@ -69,7 +69,34 @@ if let musicApp: MusicApplication = SBApplication(bundleIdentifier: "com.apple.M
 }
 ```
 
-# NSAppleScript
+## Shortcomming
+
+Using ScriptingBridge for Music.app has some limitations.
+For example, we can't select the current playlist among the playlists.
+Such limitations can be overcome by using AppleScript.
+
+### NSAppleScript
 
 We can also use `NSAppleScript` to execute AppleScript.
 This way requres us to write AppleScript codes and implement some classes or structs to handle the result. Refer to [the example](https://github.com/sonsongithub/AppleScriptBridge/blob/main/AppleScriptBridge/AppleScriptManager.swift).
+
+MusicConMenu uses this class to select the current playlist.
+Please refer to [the source code](https://github.com/sonsongithub/MusicConMenu/blob/105eef145c286ea40d1b4d8c247251b35ada39a1/MusicConMenu/Music%2Bextension.swift#L68)
+
+```
+extension MusicPlaylist {
+    func play() {
+        do {
+            guard let name = self.name else { return }
+            let script = """
+            tell application "Music"
+                play the playlist named "\(name)"
+            end tell
+            """
+            _ = try AppleScriptManager.call(script: script)
+        } catch {
+            print(error)
+        }
+    }
+}
+```
